@@ -1,8 +1,10 @@
-package io.github.kennethviov;
+package io.github.kennethviov.input;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector3;
+import io.github.kennethviov.Frog;
+import io.github.kennethviov.GameScreen;
 
 public class InputHandler {
 
@@ -17,7 +19,7 @@ public class InputHandler {
     public void handleInput(float delta) {
         boolean moving = false;
 
-        // attack/catch input
+        /// attack/catch input
         if (Gdx.input.isTouched()) {
             Vector3 click = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
             game.camera.unproject(click);
@@ -34,7 +36,7 @@ public class InputHandler {
             return;
         }
 
-        // movement handlers
+        /// movement handlers
         if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
             frog.getPosition().y += frog.speed * delta;
             frog.setCurrAnimation(frog.getAnimation("moveUp"));

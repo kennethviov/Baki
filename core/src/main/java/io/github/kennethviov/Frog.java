@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import io.github.kennethviov.input.InputHandler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -61,6 +62,7 @@ public class Frog {
     public Vector2 getPosition() { return position; }
     public Animation<TextureRegion> getAnimation(String aniName) { return animations.get(aniName); }
     public Animation<TextureRegion> getCurrAnimation() { return currAnimation; }
+
     public void setCurrAnimation(Animation<TextureRegion> animation) { this.currAnimation = animation; }
 
     /// magics
