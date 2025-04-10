@@ -8,14 +8,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 /** First screen of the application. Displayed after the application is created. */
 public class GameScreen implements Screen {
 
-    private final Main game;
     private final Frog frog;
-    private WorldRenderer worldRenderer;
+    private final WorldRenderer worldRenderer;
     public final OrthographicCamera camera;
     private final SpriteBatch batch;
 
     public GameScreen(Main game) {
-        this.game = game;
         this.frog = new Frog(this);
         this.batch = game.batch;
 
