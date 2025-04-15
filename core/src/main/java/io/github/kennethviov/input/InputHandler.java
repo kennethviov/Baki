@@ -38,36 +38,40 @@ public class InputHandler {
 
         /// movement handlers
         if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
-            frog.getPosition().y += frog.speed * delta;
+            frog.getPosition().y += frog.SPEED * delta;
             frog.setCurrAnimation(frog.getAnimation("moveUp"));
             moving = true;
             /// dash logic
-            if (spaceIsPressed()) {
-                frog.getPosition().y += (3 * frog.speed * delta);
+            if (spaceIsPressed() && frog.canDash()) {
+                frog.getPosition().y += (25 * (frog.SPEED * delta));
+                frog.triggerDashCooldown();
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
-            frog.getPosition().y -= frog.speed * delta;
+            frog.getPosition().y -= frog.SPEED * delta;
             frog.setCurrAnimation(frog.getAnimation("moveDown"));
             moving = true;
-            if (spaceIsPressed()) {
-                frog.getPosition().y -= (3 * frog.speed * delta);
+            if (spaceIsPressed() && frog.canDash()) {
+                frog.getPosition().y -= (25 * (frog.SPEED * delta));
+                frog.triggerDashCooldown();
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
-            frog.getPosition().x += frog.speed * delta;
+            frog.getPosition().x += frog.SPEED * delta;
             frog.setCurrAnimation(frog.getAnimation("moveRight"));
             moving = true;
-            if (spaceIsPressed()) {
-                frog.getPosition().x += (3 * frog.speed * delta);
+            if (spaceIsPressed() && frog.canDash()) {
+                frog.getPosition().x += (25 * (frog.SPEED * delta));
+                frog.triggerDashCooldown();
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
-            frog.getPosition().x -= frog.speed * delta;
+            frog.getPosition().x -= frog.SPEED * delta;
             frog.setCurrAnimation(frog.getAnimation("moveLeft"));
             moving = true;
-            if (spaceIsPressed()) {
-                frog.getPosition().x -= (3 * frog.speed * delta);
+            if (spaceIsPressed() && frog.canDash()) {
+                frog.getPosition().x -= (25 * (frog.SPEED * delta));
+                frog.triggerDashCooldown();
             }
         }
         if (!moving) {

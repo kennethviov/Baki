@@ -12,6 +12,7 @@ public class GameScreen implements Screen {
     private final WorldRenderer worldRenderer;
     public final OrthographicCamera camera;
     private final SpriteBatch batch;
+    private final CameraManager cameraManager;
 
     public GameScreen(Main game) {
         this.frog = new Frog(this);
@@ -21,6 +22,10 @@ public class GameScreen implements Screen {
         camera.setToOrtho(false,
             (float)Gdx.graphics.getWidth() / 3,
             (float)Gdx.graphics.getHeight() / 3);
+
+        cameraManager = new CameraManager(camera);
+
+        cameraManager.setWorldSize(40*16, 30*16);
 
         worldRenderer = new WorldRenderer(camera);
     }
@@ -35,8 +40,8 @@ public class GameScreen implements Screen {
         // Draw your screen here. "delta" is the time since last render in seconds.
         frog.update(delta);
 
-        camera.position.set(frog.getPosition().x, frog.getPosition().y, 0);
-        camera.update();
+        cameraManager.setTarget(frog.getPosition());
+        cameraManager.update(delta);
 
         worldRenderer.render();
 

@@ -15,8 +15,10 @@ public class Frog {
     private final InputHandler inputHandler;
 
     private final Vector2 position;
-    public final float speed = 75f;
+    public final float SPEED = 75f;
     public float attackTimer = 0f;
+    public float dashCooldown = 0f;
+    public final float DASH_COOLDOWN = 1f;
 
     public final Texture texture;
     private float stateTime;
@@ -65,10 +67,17 @@ public class Frog {
 
     public void setCurrAnimation(Animation<TextureRegion> animation) { this.currAnimation = animation; }
 
-    /// magics
+    /// space dash logic
+    public boolean canDash() { return dashCooldown <= 0; }
+    public void triggerDashCooldown() { dashCooldown = DASH_COOLDOWN; }
+
+    /// magic
     public void update(float delta) {
         stateTime += delta;
 
+        if (dashCooldown > 0) {
+            dashCooldown -= delta;
+        }
         if (attackTimer > 0) {
             attackTimer -= delta;
             return;

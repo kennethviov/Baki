@@ -1,35 +1,42 @@
 package io.github.kennethviov;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
 public class CameraManager {
-    private OrthographicCamera camera;
-    private Vector2 targetPos;
+    private final OrthographicCamera camera;
+    private final Vector2 target = new Vector2();
 
-    public CameraManager(float viewportWidth, float viewportHeight) {
-        camera = new OrthographicCamera(viewportWidth, viewportHeight);
-        camera.position.set(viewportWidth / 2f, viewportHeight / 2f, 0);
-        camera.update();
+    private float worldWidth, worldHeight;
 
-        targetPos = new Vector2(camera.position.x, camera.position.y);
+    public CameraManager(OrthographicCamera camera) {
+        this.camera = camera;
     }
 
-    public void update(float deltaTime) {
-        // smooth follow (lerp(linear interpolation))
+    public void setTarget(Vector2 position) {
+        target.set(position);
+    }
+
+    public void setWorldSize(float worldWidth, float worldHeight) {
+        this.worldWidth = worldWidth;
+        this.worldHeight = worldHeight;
+    }
+
+    public void update(float delta) {
+        //smooth follow
         Vector3 pos = camera.position;
-        pos.x += (targetPos.x - pos.x) * 5f * deltaTime;
-        pos.y += (targetPos.y - pos.y) * 5f * deltaTime;
-        camera.update();
-    }
+        pos.x += (target.x - pos.x) * 5f * delta;
+        pos.y += (target.y - pos.y) * 5f * delta;
 
-    public void follow(Vector2 newTarget) {
-        this.targetPos.set(newTarget);
-    }
+        //clamp camera to world bounds
+        float halfW = camera.viewportWidth * camera.zoom / 2f;
+        float halfH = camera.viewportHeight * camera.zoom  / 2f;
 
-    public void zoom(float zoomAmount) {
-        camera.zoom += zoomAmount;
+        pos.x = MathUtils.clamp(pos.x, halfW, worldWidth - halfW);
+        pos.y = MathUtils.clamp(pos.y, halfH, worldHeight - halfH);
+
         camera.update();
     }
 
