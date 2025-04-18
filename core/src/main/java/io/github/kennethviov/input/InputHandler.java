@@ -2,6 +2,8 @@ package io.github.kennethviov.input;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import io.github.kennethviov.Frog;
 import io.github.kennethviov.GameScreen;
@@ -84,6 +86,12 @@ public class InputHandler {
             if (frog.getCurrAnimation() == frog.getAnimation("moveDown"))
                 frog.setCurrAnimation(frog.getAnimation("idleDown"));
         }
+
+        // Clamp frog position so he stays inside the world
+        TextureRegion frame = frog.getCurrAnimation().getKeyFrame(0f);
+
+        frog.getPosition().x = MathUtils.clamp(frog.getPosition().x, 0, game.WORLD_WIDTH - (frame.getRegionWidth() * 1.25f));
+        frog.getPosition().y = MathUtils.clamp(frog.getPosition().y, 0, game.WORLD_HEIGHT - (frame.getRegionHeight() * 1.25f));
     }
 
     private boolean spaceIsPressed() {

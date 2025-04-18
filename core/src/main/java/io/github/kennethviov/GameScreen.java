@@ -8,6 +8,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 /** First screen of the application. Displayed after the application is created. */
 public class GameScreen implements Screen {
 
+    public final float WORLD_WIDTH = 40 * 16f;
+    public final float WORLD_HEIGHT = 30 * 16f;
+
+
     private final Frog frog;
     private final WorldRenderer worldRenderer;
     public final OrthographicCamera camera;

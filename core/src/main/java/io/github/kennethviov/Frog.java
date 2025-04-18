@@ -18,7 +18,7 @@ public class Frog {
     public final float SPEED = 75f;
     public float attackTimer = 0f;
     public float dashCooldown = 0f;
-    public final float DASH_COOLDOWN = 1f;
+    public final float DASH_COOLDOWN = 2f; // in seconds
 
     public final Texture texture;
     private float stateTime;
