@@ -1,12 +1,13 @@
-package io.github.kennethviov.input;
+package io.github.kennethviov.utilities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import io.github.kennethviov.Frog;
-import io.github.kennethviov.GameScreen;
+import io.github.kennethviov.entity.Frog;
+import io.github.kennethviov.screens.GameScreen;
 
 public class InputHandler {
 
@@ -33,7 +34,9 @@ public class InputHandler {
             if (dy > dx && dy < -dx) frog.setCurrAnimation(frog.getAnimation("catchLeft"));
             if (dy < dx && dy > -dx) frog.setCurrAnimation(frog.getAnimation("catchRight"));
             if (dy < dx && dy < -dx) frog.setCurrAnimation(frog.getAnimation("catchDown"));
-            if (dy > dx && dy > -dx) frog.setCurrAnimation(frog.getAnimation("catchUp"));
+            if (dy > dx && dy > -dx) frog.setCurrAnimation(frog.getAnimation("catchDown"));
+
+            frog.shootTongue(new Vector2(click.x, click.y));
 
             return;
         }

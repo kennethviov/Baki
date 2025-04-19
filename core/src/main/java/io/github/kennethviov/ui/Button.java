@@ -1,4 +1,4 @@
-package io.github.kennethviov.input;
+package io.github.kennethviov.ui;
 
 import com.badlogic.gdx.graphics.Texture;
 

@@ -1,4 +1,4 @@
-package io.github.kennethviov;
+package io.github.kennethviov.utilities;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -10,8 +10,8 @@ public class WorldRenderer {
     private final OrthogonalTiledMapRenderer mapRenderer;
     private final OrthographicCamera camera;
 
-    public WorldRenderer(OrthographicCamera camera) {
-        map = new TmxMapLoader().load("maps/tmx/pond_map.tmx");
+    public WorldRenderer(OrthographicCamera camera, String pathToFile) {
+        map = new TmxMapLoader().load(pathToFile);
         mapRenderer = new OrthogonalTiledMapRenderer(map);
         this.camera = camera;
     }

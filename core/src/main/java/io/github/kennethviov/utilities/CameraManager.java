@@ -1,4 +1,4 @@
-package io.github.kennethviov;
+package io.github.kennethviov.utilities;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
@@ -16,7 +16,7 @@ public class CameraManager {
     }
 
     public void setTarget(Vector2 position) {
-        target.set(position);
+        target.set(position).add(8, 8); // half of sprite size
     }
 
     public void setWorldSize(float worldWidth, float worldHeight) {

@@ -1,11 +1,12 @@
-package io.github.kennethviov;
+package io.github.kennethviov.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import io.github.kennethviov.input.InputHandler;
+import io.github.kennethviov.screens.GameScreen;
+import io.github.kennethviov.utilities.InputHandler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,10 +21,12 @@ public class Frog {
     public float dashCooldown = 0f;
     public final float DASH_COOLDOWN = 2f; // in seconds
 
-    public final Texture texture;
+    private final Tongue tongue;
+
+    public final int width = 16, height = 16; // sprite dimensions
+    private final Texture texture;
     private float stateTime;
     private Animation<TextureRegion> currAnimation;
-
     private final Map<String, Animation<TextureRegion>> animations;
 
     public Frog (GameScreen game) {
@@ -33,9 +36,7 @@ public class Frog {
         texture = new Texture("sprites/frog/frog (2).png");
 
         // Sprite sheet info
-        int frameWidth = 16,
-            frameHeight = 16;
-        TextureRegion[][] frames = TextureRegion.split(texture, frameWidth, frameHeight);
+        TextureRegion[][] frames = TextureRegion.split(texture, width, height);
 
         animations = new HashMap<>();
         String[] aniNames = {
@@ -53,6 +54,8 @@ public class Frog {
         // default animation
         currAnimation = animations.get("idleDown");
         stateTime = 0f;
+
+        tongue = new Tongue();
     }
 
     /// create an animation based on the given array of frames
@@ -70,6 +73,22 @@ public class Frog {
     /// space dash logic
     public boolean canDash() { return dashCooldown <= 0; }
     public void triggerDashCooldown() { dashCooldown = DASH_COOLDOWN; }
+
+    ///  tongue stuff
+    public void shootTongue(Vector2 clickPos) {
+        tongue.shoot(new Vector2(position).add(width * .6f, height * .75f), clickPos);
+    }
+
+    public void updateTongue(float delta) {
+        tongue.update(delta);
+    }
+
+    public void renderTongue(SpriteBatch batch, Texture pixel) {
+        if (pixel == null) {
+            System.out.println("pixel is null");
+        }
+        tongue.render(batch, pixel);
+    }
 
     /// magic
     public void update(float delta) {

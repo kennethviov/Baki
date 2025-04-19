@@ -1,8 +1,9 @@
-package io.github.kennethviov;
+package io.github.kennethviov.screens;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import io.github.kennethviov.Main;
 
 /** First screen of the application. Displayed after the application is created. */
 public class MainMenuScreen implements Screen {
